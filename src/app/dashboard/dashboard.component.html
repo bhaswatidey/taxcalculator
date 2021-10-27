@@ -24,8 +24,26 @@
                     </tr>
                         
                 </table>
+                <table class="table" *ngIf="disviewuser">
+                    <tr style="color: white;">
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>CITY</th>
+                        <th>COMPANY</th>
+                    </tr>
+                    <tbody>
+                    <tr *ngFor="let usr of users" style="color: white;">
+                        <td>{{usr.id}}</td>
+                        <td>{{usr.name}}</td>
+                        <td>{{usr.email}}</td>
+                        <td>{{usr.address.city}}</td>
+                        <td>{{usr.company.name}}</td>
+                    </tr>
+                </tbody>
+                </table>
 
-                
+                   
                     
                        
                     
@@ -54,7 +72,7 @@
                         <br>
                         <tr>
                             <td></td>
-                            <td style="text-align: center;"><button class="btn btn-primary" (click)="getadduser()">Add</button></td>
+                            <td style="text-align: center;"><button class="btn btn-primary" (click)="getadduser()">Submit</button></td>
                         </tr>   
                         <br>
                         <br>

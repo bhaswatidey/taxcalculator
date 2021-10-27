@@ -8,14 +8,16 @@ import { ApiService } from '../api.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  
+  users:any[]=[]
   name=""
   email=""
   number=""
   sex=""
   salary=""
 
-  adduser=true
+  adduser=false
+  disviewuser=false;
   res=0
 
 
@@ -24,7 +26,8 @@ export class DashboardComponent implements OnInit {
     if(localStorage.getItem('loggedin')!='true'){
       this.router.navigate(['/login'])
     }
-    this.adduser=false
+    this.adduser=false;
+    this.disviewuser=false;
    
   }
 
@@ -45,15 +48,27 @@ export class DashboardComponent implements OnInit {
     //this.adduser=false;
   //}
   adduserfunc(){
+    this.disviewuser=false;
     this.adduser=true;
   }
   getviewuser(){
     this.adduser=false
+    this.disviewuser=true
+    this.users=[]
     this.api.getviewuser().subscribe((data:any)=>{
       console.log(data)
+      //var i=0;
+      //for(i=0;i<data.length;i++){
+        //this.users.push(data[i])
+     // }
+      data.forEach((element:any) => {
+        this.users.push(element)        
+     });
+      
     })
   }
   getadduser(){
+    
     this.api.getadduser(this.name,this.email,this.number,this.sex,this.salary).subscribe((data:any)=>{
       console.log(data)
       this.res=data.tax
